@@ -29,10 +29,11 @@
             android:textStyle="bold" />
 
         <TextView
+            android:layout_marginHorizontal="@dimen/marginHorizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Inicia sesión para disfrutar de nuestras pelis"
+            android:text="Inicia sesión para disfrutar de nuestro catalogo de peliculas"
             android:textColor="@color/text"
             android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@+id/tvDisfruta" />
@@ -111,7 +112,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <TextView
