@@ -8,5 +8,7 @@
     <color name="secondary_300">#c01111</color>
     <color name="text">#E2E1E1</color>
 
+    <color name="textSub">#8AE2E2E1</color>
+
 
 </resources>
