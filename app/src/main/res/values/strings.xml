@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">TrabajoPractico</string>
+
+    <string name="btnVerMas">Ver más</string>
+    <string name="tvIniciarSesion">Iniciar Sesión</string>
+    <string name="tvText">Inicia sesión para disfrutar de nuestro catalogo de peliculas</string>
+    <string name="email">Email</string>
+    <string name="contrasenia">Contraseña</string>
+    <string name="recordar_usuario">Recordar usuario</string>
+    <string name="antc">Aún no tenes cuenta?</string>
+    <string name="registrate">Registrate</string>
 </resources>

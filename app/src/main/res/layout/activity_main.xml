@@ -23,7 +23,7 @@
             android:id="@+id/tvIniciaSesion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Iniciar Sesión"
+            android:text="@string/tvIniciarSesion"
             android:textColor="@color/secondary_300"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Inicia sesión para disfrutar de nuestro catalogo de peliculas"
+            android:text="@string/tvText"
             android:textColor="@color/text"
             android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@+id/tvDisfruta" />
@@ -55,9 +55,9 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@color/primary_100"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColor="@color/text"
-            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
             android:textColorHint="@color/text" />
 
         <EditText
@@ -65,10 +65,10 @@
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:background="@color/primary_100"
-            android:hint="Contraseña"
+            android:hint="@string/contrasenia"
             android:textColor="@color/text"
             android:inputType="textPassword"
-            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
             android:textColorHint="@color/text" />
 
         <LinearLayout
@@ -79,7 +79,7 @@
                 android:id="@+id/myCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recordar usuario"
+                android:text="@string/recordar_usuario"
                 android:textColor="@color/text"
                 />
 
@@ -103,11 +103,12 @@
             android:layout_marginHorizontal="@dimen/marginHorizontal"
             android:layout_marginTop="60dp"
             android:backgroundTint="@color/secondary_300"
-            android:text="Iniciar Sesión"
+            android:text="@string/tvIniciarSesion"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llInputs"></Button>
+            app:layout_constraintTop_toBottomOf="@+id/llInputs"
+            />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -119,24 +120,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Aún no tenes cuenta?"
+                android:text="@string/antc"
                 android:textColor="@color/text"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginRight="@dimen/marginHorizontal"
-                android:text="Registrate"
+                android:layout_marginEnd="@dimen/marginHorizontal"
+                android:text="@string/registrate"
                 android:textColor="@color/secondary_300"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
