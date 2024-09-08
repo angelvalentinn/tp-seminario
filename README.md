@@ -1,1 +1,8 @@
-![c5a3fe7f-5318-4a62-878a-a6f56bec5c38](https://github.com/user-attachments/assets/35502739-fa9e-4644-86e5-c5fad5a4141a)
+# Trabajo Práctico - Entrega 1
+## Seminario de Lenguajes
+Maquetado de login, registro, lista con los datos principales de los elementos y datos completos de un elemento. También se agrego navegación entre login, registro y lista.
+
+![image1](https://github.com/user-attachments/assets/0189352f-51c5-4a4d-8974-b45106861919)
+![image2](https://github.com/user-attachments/assets/820127ec-45a8-4a5c-99a7-33c15115a632)
+![image3](https://github.com/user-attachments/assets/9e5ea304-e2e1-41a1-8609-d38c3fbd373b)
+![image4](https://github.com/user-attachments/assets/90cc676e-0685-4da2-bc9e-3382bedba168)
