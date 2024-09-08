@@ -10,6 +10,7 @@
     android:padding="12dp"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="4dp"
+    android:id="@+id/pelicula_detalle"
     >
     <ImageView
         android:id="@+id/iv_pelicula"

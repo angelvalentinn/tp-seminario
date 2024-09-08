@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_300"
+    android:padding="16dp">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity"
+
+
+        >
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nSinopsis:"
+            android:textSize="25sp"
+            android:textColor="@color/secondary_300" />
+
+
+        <TextView
+            android:id="@+id/Sinopsis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="top"
+            android:text="Escribe la sinopsis aquí..."
+            android:minLines="3"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nTitulos:"
+            android:textSize="25sp"
+            android:textColor="@color/secondary_300" />
+
+
+        <TextView
+            android:id="@+id/Titulos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="Escribe los títulos aquí..."
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Genero:"
+            android:textSize="25sp"
+            android:textColor="@color/secondary_300" />
+
+
+        <TextView
+            android:id="@+id/Genero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="Escribe el género aquí..."
+            android:textSize="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Director:"
+            android:textSize="25sp"
+            android:textColor="@color/secondary_300" />
+
+
+        <TextView
+            android:id="@+id/Director"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="Escribe el director aquí..."
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+
+    </LinearLayout>
+</ScrollView>
