@@ -8,11 +8,7 @@
     tools:context=".ListadoPeliculasActivity"
     android:orientation="vertical"
     android:background="@color/primary_300"
-
     >
-
-
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPeliculas"
