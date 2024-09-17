@@ -8,6 +8,9 @@
     android:background="@color/primary_300"
     tools:context=".MainActivity">
 
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <LinearLayout
         android:id="@+id/llTextIniciarSesion"
         android:layout_width="wrap_content"

@@ -9,6 +9,8 @@
     android:orientation="vertical"
     android:background="@color/primary_300"
     >
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPeliculas"

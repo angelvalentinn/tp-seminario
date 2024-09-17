@@ -24,4 +24,7 @@
     <string name="detalle_genero">GÉNERO:</string>
     <string name="detalle_sipnosis">SIPNOSIS:</string>
     <string name="detalle_trama">TRAMA DE PELICULA</string>
+    <string name="arrowLeft_description">Volver hacia atrás</string>
+    <string name="tp">Trabajo Práctico</string>
+
 </resources>
