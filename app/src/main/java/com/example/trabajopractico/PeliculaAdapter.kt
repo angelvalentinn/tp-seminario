@@ -1,9 +1,11 @@
 package com.example.trabajopractico
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -15,6 +17,7 @@ class PeliculaAdapter (var peliculas: MutableList<Pelicula>, var context: Contex
         var txtTitulo: TextView
         var txtFecha: TextView
         var txtCalificacion: TextView
+        val btnVerMas: Button = itemView.findViewById(R.id.btnVerMas)
 
         init {
             txtTitulo = view.findViewById(R.id.tv_titulo)
@@ -38,6 +41,16 @@ class PeliculaAdapter (var peliculas: MutableList<Pelicula>, var context: Contex
         holder.txtTitulo.text = item.titulo
         holder.txtFecha.text = "Fecha de Estreno: ${item.fecha}"
         holder.txtCalificacion.text = "Calificación: ${item.calificacion}"
+
+        holder.btnVerMas.setOnClickListener {
+            val intent = Intent(context, ActivityDetalle::class.java)
+
+            intent.putExtra("titulo", item.titulo)
+            // Paso solo el titulo porque en el detalle
+            // no hay apartado para calificacion ni fecha
+            context.startActivity(intent)
+        }
+
     }
 
 

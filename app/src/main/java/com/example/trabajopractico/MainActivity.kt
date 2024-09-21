@@ -57,7 +57,8 @@ class MainActivity : AppCompatActivity() {
         btnIniciarSesion.setOnClickListener {
             val intent = Intent(this, ListadoPeliculasActivity::class.java);
             startActivity(intent)
-            finish()
+            //finish() lo saco para que la actividad quede en cola
+           // y se pueda volver con la flecha de la toolbar
         }
     }
 }
