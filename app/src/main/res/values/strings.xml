@@ -26,5 +26,6 @@
     <string name="detalle_trama">TRAMA DE PELICULA</string>
     <string name="arrowLeft_description">Volver hacia atrás</string>
     <string name="tp">Trabajo Práctico</string>
+    <string name="add_pelicula">Agregar Pelicula</string>
 
 </resources>
