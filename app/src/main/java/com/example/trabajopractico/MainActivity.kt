@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         inicializarComponentes()
+        recordarUsuario()
         navegarARegistro()
         manejarInicioSesion()
     }
@@ -53,12 +54,20 @@ class MainActivity : AppCompatActivity() {
             val contraseña = etPassword.text.toString()
 
             if (verificarCredenciales(email, contraseña)) {
+                if (checkBox.isChecked) {
+                    var preferencias = getSharedPreferences(resources.getString(R.string.sp_credenciales), MODE_PRIVATE)
+                    preferencias.edit().putString(resources.getString(R.string.email_usuario), email).apply()
+                    preferencias.edit().putString(resources.getString(R.string.password_usuario), contraseña).apply()
+                    //Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+                }
                 val intent = Intent(this, ListadoPeliculasActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
                 Toast.makeText(this, "Email o contraseña incorrectos", Toast.LENGTH_SHORT).show()
             }
+
+
         }
     }
 
@@ -66,4 +75,26 @@ class MainActivity : AppCompatActivity() {
         val user = AppDatabase.getDatabase(applicationContext).userDao().getByEmail(email)
         return user?.password == contraseña
     }
+
+    private fun recordarUsuario() {
+
+        val preferencias = getSharedPreferences(resources.getString(R.string.sp_credenciales), MODE_PRIVATE)
+        val emailGuardado = preferencias.getString(resources.getString(R.string.email_usuario), null)
+        val passwordGuardado = preferencias.getString(resources.getString(R.string.password_usuario), null)
+
+
+        if (emailGuardado!= null && passwordGuardado!= null) {
+            Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+            startMainActivity(emailGuardado) // Automatically log in
+        }
+    }
+
+    private fun startMainActivity(email: String) {
+        val intent = Intent(this, ListadoPeliculasActivity::class.java)
+        intent.putExtra(resources.getString(R.string.email_usuario), email)
+        startActivity(intent)
+        finish()
+
+    }
 }
+
