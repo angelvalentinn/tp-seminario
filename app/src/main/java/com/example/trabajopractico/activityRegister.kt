@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 
 class activityRegister : AppCompatActivity() {
 
@@ -28,6 +30,7 @@ class activityRegister : AppCompatActivity() {
             insets
         }
         inicializarComponentes()
+
         registrarUsuario()
     }
 
@@ -47,7 +50,8 @@ class activityRegister : AppCompatActivity() {
     }
 
     private fun validarEmail(email: String): Boolean {
-        val emailRegex = "[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}".toRegex()
+        val emailRegex =
+            "[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}".toRegex()
         return email.matches(emailRegex)
     }
 
@@ -55,7 +59,6 @@ class activityRegister : AppCompatActivity() {
         var user = AppDatabase.getDatabase(applicationContext).userDao().getByEmail(email)
         return user != null
     }
-
 
     private fun registrarUsuario() {
         btnRegistrarse.setOnClickListener {
@@ -65,7 +68,8 @@ class activityRegister : AppCompatActivity() {
             var contraseñaRepetida = etContraseñaRepetida.text.toString()
 
             if (email.isEmpty() || contraseña.isEmpty() || contraseñaRepetida.isEmpty()) {
-                Toast.makeText(this, "Es necesario completar todos los datos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Es necesario completar todos los datos", Toast.LENGTH_SHORT)
+                    .show()
 
             } else if (contraseña != contraseñaRepetida) {
                 Toast.makeText(this, "Las contraseñas no son iguales", Toast.LENGTH_SHORT).show()
@@ -73,11 +77,12 @@ class activityRegister : AppCompatActivity() {
             } else if (!validarEmail(email)) {
                 Toast.makeText(this, "El formato del email es inválido", Toast.LENGTH_SHORT).show()
 
-            } else if(existeUsuario(email)) {
+            } else if (existeUsuario(email)) {
                 Toast.makeText(this, "Email ya registrado", Toast.LENGTH_SHORT).show()
 
             } else {
                 var nuevoUsuario = User(email, contraseña)
+
                 AppDatabase.getDatabase(applicationContext).userDao().insert(nuevoUsuario)
                 navegarAIniciarSesion()
 
