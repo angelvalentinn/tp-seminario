@@ -2,9 +2,9 @@ package com.example.trabajopractico
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -23,7 +23,7 @@ class ListadoPeliculasActivity : AppCompatActivity() {
 
         val ivBack: ImageView = findViewById(R.id.ivBack)
         ivBack.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
             }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -33,7 +33,25 @@ class ListadoPeliculasActivity : AppCompatActivity() {
         }
 
         inicializarRecyclerView()
+        setSupportActionBar(findViewById(R.id.toolbar))
 
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_crear_pelicula, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_add_pelicula -> {
+                val intent = Intent(this, CrearPeliculaActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun getPeliculas(): MutableList<Pelicula> {

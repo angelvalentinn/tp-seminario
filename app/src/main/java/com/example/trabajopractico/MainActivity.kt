@@ -1,64 +1,100 @@
 package com.example.trabajopractico
+
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.widget.Toolbar
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-
+import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var tvRegistrate: TextView
     private lateinit var btnIniciarSesion: Button
+    private lateinit var etEmail: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var checkBox: CheckBox
     private lateinit var ivBack: ImageView
     private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
         inicializarComponentes()
+        recordarUsuario()
         navegarARegistro()
-        navegarAListadoPeliculas()
-
+        manejarInicioSesion()
     }
 
     private fun inicializarComponentes() {
-        tvRegistrate = findViewById((R.id.tvRegistrate))
-        btnIniciarSesion = findViewById((R.id.btnIniciarSesion))
-        ivBack = findViewById((R.id.ivBack))
+        tvRegistrate = findViewById(R.id.tvRegistrate)
+        btnIniciarSesion = findViewById(R.id.btnIniciarSesion)
+        etEmail = findViewById(R.id.etEmail)
+        etPassword = findViewById(R.id.etPassword)
+        checkBox = findViewById(R.id.myCheckBox)
+        ivBack = findViewById(R.id.ivBack)
         toolbar = findViewById(R.id.toolbar)
-
     }
-
 
     private fun navegarARegistro() {
         tvRegistrate.setOnClickListener {
-            val intent = Intent(this, activityRegister::class.java);
+            val intent = Intent(this, activityRegister::class.java)
             startActivity(intent)
-            finish()
         }
     }
 
-    private fun navegarAListadoPeliculas() {
+    private fun manejarInicioSesion() {
         btnIniciarSesion.setOnClickListener {
-            val intent = Intent(this, ListadoPeliculasActivity::class.java);
-            startActivity(intent)
-            //finish() lo saco para que la actividad quede en cola
-           // y se pueda volver con la flecha de la toolbar
+            val email = etEmail.text.toString()
+            val contraseña = etPassword.text.toString()
+
+            if (verificarCredenciales(email, contraseña)) {
+                if (checkBox.isChecked) {
+                    var preferencias = getSharedPreferences(resources.getString(R.string.sp_credenciales), MODE_PRIVATE)
+                    preferencias.edit().putString(resources.getString(R.string.email_usuario), email).apply()
+                    preferencias.edit().putString(resources.getString(R.string.password_usuario), contraseña).apply()
+                    //Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+                }
+                val intent = Intent(this, ListadoPeliculasActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "Email o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+            }
+
+
         }
     }
+
+    private fun verificarCredenciales(email: String, contraseña: String): Boolean {
+        val user = AppDatabase.getDatabase(applicationContext).userDao().getByEmail(email)
+        return user?.password == contraseña
+    }
+
+    private fun recordarUsuario() {
+
+        val preferencias = getSharedPreferences(resources.getString(R.string.sp_credenciales), MODE_PRIVATE)
+        val emailGuardado = preferencias.getString(resources.getString(R.string.email_usuario), null)
+        val passwordGuardado = preferencias.getString(resources.getString(R.string.password_usuario), null)
+
+
+        if (emailGuardado!= null && passwordGuardado!= null) {
+            Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+            startMainActivity(emailGuardado) // Automatically log in
+        }
+    }
+
+    private fun startMainActivity(email: String) {
+        val intent = Intent(this, ListadoPeliculasActivity::class.java)
+        intent.putExtra(resources.getString(R.string.email_usuario), email)
+        startActivity(intent)
+        finish()
+
+    }
 }
+

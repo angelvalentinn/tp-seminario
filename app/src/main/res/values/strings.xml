@@ -26,5 +26,11 @@
     <string name="detalle_trama">TRAMA DE PELICULA</string>
     <string name="arrowLeft_description">Volver hacia atrás</string>
     <string name="tp">Trabajo Práctico</string>
+    <string name="add_pelicula">Agregar Pelicula</string>
+    <string name="email_usuario">EMAIL</string>
+    <string name="password_usuario">PASSWORD</string>
+    <string name="sp_credenciales">SP_CREDENCIALES</string>
+    <string name="portada_pelicula">Portada Pelicula</string>
+
 
 </resources>
