@@ -34,7 +34,7 @@ class ListadoPeliculasActivity : AppCompatActivity() {
 
         inicializarRecyclerView()
         setSupportActionBar(findViewById(R.id.toolbar))
-
+        supportActionBar?.setDisplayShowTitleEnabled(false) //Elimina el titulo de la toolbar
 
     }
 
@@ -70,5 +70,6 @@ class ListadoPeliculasActivity : AppCompatActivity() {
         rvPeliculas = findViewById(R.id.rvPeliculas)
         rvPeliculas.layoutManager = LinearLayoutManager(this)
         rvPeliculas.adapter =  PeliculaAdapter(getPeliculas(), this)
+
     }
 }

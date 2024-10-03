@@ -2,6 +2,7 @@ package com.example.trabajopractico
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -10,7 +11,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class activityRegister : AppCompatActivity() {
 
@@ -34,7 +40,6 @@ class activityRegister : AppCompatActivity() {
             insets
         }
         inicializarComponentes()
-
         registrarUsuario()
     }
 
@@ -46,11 +51,9 @@ class activityRegister : AppCompatActivity() {
     }
 
     private fun navegarAIniciarSesion() {
-        btnRegistrarse.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java);
-            startActivity(intent)
-            finish()
-        }
+        val intent = Intent(this, MainActivity::class.java);
+        startActivity(intent)
+        finish()
     }
 
     private fun validarEmail(email: String): Boolean {
@@ -59,17 +62,12 @@ class activityRegister : AppCompatActivity() {
         return email.matches(emailRegex)
     }
 
-    private fun existeUsuario(email: String): Boolean {
-        var user = AppDatabase.getDatabase(applicationContext).userDao().getByEmail(email)
-        return user != null
-    }
-
     private fun registrarUsuario() {
         btnRegistrarse.setOnClickListener {
 
             var email = etEmail.text.toString()
             var contraseña = etContraseña.text.toString()
-            var contraseñaRepetida = etContraseñaRepetida.text.toString()
+            var contraseñaRepetida = etContraseñaRepetida.text.toString();
 
             if (email.isEmpty() || contraseña.isEmpty() || contraseñaRepetida.isEmpty()) {
                 Toast.makeText(this, "Es necesario completar todos los datos", Toast.LENGTH_SHORT)
@@ -81,14 +79,25 @@ class activityRegister : AppCompatActivity() {
             } else if (!validarEmail(email)) {
                 Toast.makeText(this, "El formato del email es inválido", Toast.LENGTH_SHORT).show()
 
-            } else if (existeUsuario(email)) {
-                Toast.makeText(this, "Email ya registrado", Toast.LENGTH_SHORT).show()
-
             } else {
-                var nuevoUsuario = User(email, contraseña)
+                //Verifico si el usuario ya existe en la BD en otro hilo
+                lifecycleScope.launch(Dispatchers.IO) {
 
-                AppDatabase.getDatabase(applicationContext).userDao().insert(nuevoUsuario)
-                navegarAIniciarSesion()
+                    var user = AppDatabase.getDatabase(applicationContext).userDao().getByEmail(email)
+                    withContext(Dispatchers.Main) {
+                        if (user != null) {
+                            Toast.makeText(this@activityRegister, "El usuario ya está registrado", Toast.LENGTH_SHORT).show()
+                        } else {
+                            var nuevoUsuario = User(email, contraseña)
+                            withContext(Dispatchers.IO) {
+                                AppDatabase.getDatabase(applicationContext).userDao()
+                                    .insert(nuevoUsuario)
+                            }
+                            navegarAIniciarSesion()
+                        }
+                    }
+
+                }
 
             }
 

@@ -2,6 +2,7 @@ package com.example.trabajopractico
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -10,6 +11,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         inicializarComponentes()
-        recordarUsuario()
+        //recordarUsuario()
         navegarARegistro()
         manejarInicioSesion()
     }
@@ -53,25 +58,30 @@ class MainActivity : AppCompatActivity() {
             val email = etEmail.text.toString()
             val contraseña = etPassword.text.toString()
 
-            if (verificarCredenciales(email, contraseña)) {
-                if (checkBox.isChecked) {
-                    var preferencias = getSharedPreferences(resources.getString(R.string.sp_credenciales), MODE_PRIVATE)
-                    preferencias.edit().putString(resources.getString(R.string.email_usuario), email).apply()
-                    preferencias.edit().putString(resources.getString(R.string.password_usuario), contraseña).apply()
-                    //Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+            lifecycleScope.launch(Dispatchers.IO) {
+                if (verificarCredenciales(email, contraseña)) {
+                    withContext(Dispatchers.Main) {
+                        if (checkBox.isChecked) {
+                            var preferencias = getSharedPreferences(resources.getString(R.string.sp_credenciales), MODE_PRIVATE)
+                            preferencias.edit().putString(resources.getString(R.string.email_usuario), email).apply()
+                            preferencias.edit().putString(resources.getString(R.string.password_usuario), contraseña).apply()
+                            //Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+                        }
+                        val intent = Intent(this@MainActivity, ListadoPeliculasActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@MainActivity, "Email o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+                    }
                 }
-                val intent = Intent(this, ListadoPeliculasActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(this, "Email o contraseña incorrectos", Toast.LENGTH_SHORT).show()
             }
-
 
         }
     }
 
-    private fun verificarCredenciales(email: String, contraseña: String): Boolean {
+    private suspend fun verificarCredenciales(email: String, contraseña: String): Boolean {
         val user = AppDatabase.getDatabase(applicationContext).userDao().getByEmail(email)
         return user?.password == contraseña
     }

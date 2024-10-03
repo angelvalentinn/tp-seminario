@@ -22,5 +22,6 @@ class CrearPeliculaActivity : AppCompatActivity() {
             insets
         }
         setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.setDisplayShowTitleEnabled(false) //Elimina el titulo de la toolbar
     }
 }
