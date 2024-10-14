@@ -16,7 +16,7 @@
     <ImageView
         android:id="@+id/iv_pelicula"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="400dp"
         app:srcCompat="@android:drawable/ic_menu_gallery"
         android:contentDescription="@string/portada_pelicula"/>
 

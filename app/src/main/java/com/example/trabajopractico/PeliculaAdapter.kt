@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.trabajopractico.data.model.Result
 
 class PeliculaAdapter (var peliculas: MutableList<Result>, var context: Context):
@@ -19,6 +21,7 @@ class PeliculaAdapter (var peliculas: MutableList<Result>, var context: Context)
         var txtFecha: TextView
         var txtCalificacion: TextView
         val btnVerMas: Button = itemView.findViewById(R.id.btnVerMas)
+        var ivPelicula: ImageView = itemView.findViewById(R.id.iv_pelicula)
 
         init {
             txtTitulo = view.findViewById(R.id.tv_titulo)
@@ -43,7 +46,9 @@ class PeliculaAdapter (var peliculas: MutableList<Result>, var context: Context)
         holder.txtFecha.text = "Fecha de Estreno: ${item.release_date}"
         val calificacionFormateada = String.format("%.1f", item.vote_average)
         holder.txtCalificacion.text = "Calificación: $calificacionFormateada"
-
+        Glide.with(context)
+            .load("https://image.tmdb.org/t/p/original/${item.poster_path}")
+            .into(holder.ivPelicula)
         holder.btnVerMas.setOnClickListener {
             val intent = Intent(context, ActivityDetalle::class.java)
             intent.putExtra("titulo", item.original_title)
