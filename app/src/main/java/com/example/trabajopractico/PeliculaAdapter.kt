@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trabajopractico.data.model.Result
 
-class PeliculaAdapter (var peliculas: MutableList<Pelicula>, var context: Context):
+class PeliculaAdapter (var peliculas: MutableList<Result>, var context: Context):
 
     RecyclerView.Adapter<PeliculaAdapter.PeliculaViewHolder>(){
 
@@ -37,21 +38,20 @@ class PeliculaAdapter (var peliculas: MutableList<Pelicula>, var context: Contex
     override fun getItemCount() = peliculas.size
 
     override fun onBindViewHolder(holder: PeliculaViewHolder, position: Int) {
-        val item = peliculas.get(position)
-        holder.txtTitulo.text = item.titulo
-        holder.txtFecha.text = "Fecha de Estreno: ${item.fecha}"
-        holder.txtCalificacion.text = "Calificación: ${item.calificacion}"
+        val item = peliculas[position]
+        holder.txtTitulo.text = item.original_title
+        holder.txtFecha.text = "Fecha de Estreno: ${item.release_date}"
+        val calificacionFormateada = String.format("%.1f", item.vote_average)
+        holder.txtCalificacion.text = "Calificación: $calificacionFormateada"
 
         holder.btnVerMas.setOnClickListener {
             val intent = Intent(context, ActivityDetalle::class.java)
-
-            intent.putExtra("titulo", item.titulo)
-            // Paso solo el titulo porque en el detalle
-            // no hay apartado para calificacion ni fecha
+            intent.putExtra("titulo", item.original_title)
             context.startActivity(intent)
         }
-
     }
 
 
 }
+
+

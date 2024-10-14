@@ -12,12 +12,13 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         private var INSTANCIA: AppDatabase? = null
-        fun getDatabase(context: Context):AppDatabase {
+        fun getDatabase(context: Context): AppDatabase {
             if (INSTANCIA == null) {
-                synchronized(this){
-                    INSTANCIA = Room.databaseBuilder(context,
-                        AppDatabase::class.java,"users_database"
-                    ).allowMainThreadQueries()
+                synchronized(this) {
+                    INSTANCIA = Room.databaseBuilder(
+                        context,
+                        AppDatabase::class.java, "users_database"
+                    )   .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
                         .build()
                 }

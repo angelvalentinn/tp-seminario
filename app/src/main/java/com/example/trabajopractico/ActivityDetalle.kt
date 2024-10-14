@@ -16,7 +16,7 @@ class ActivityDetalle: AppCompatActivity() {
 
         val ivBack: ImageView = findViewById(R.id.ivBack)
         ivBack.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
         val titulo = intent.getStringExtra("titulo")
