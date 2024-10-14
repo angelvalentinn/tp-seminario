@@ -15,6 +15,8 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,9 +28,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var ivBack: ImageView
     private lateinit var toolbar: Toolbar
 
+    lateinit var tvServicioRest: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
 
         inicializarComponentes()
         //recordarUsuario()

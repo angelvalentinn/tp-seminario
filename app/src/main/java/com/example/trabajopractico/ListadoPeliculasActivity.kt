@@ -2,6 +2,7 @@ package com.example.trabajopractico
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -11,15 +12,23 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trabajopractico.data.model.RetrofitClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class ListadoPeliculasActivity : AppCompatActivity() {
 
     private lateinit var rvPeliculas: RecyclerView
+    private lateinit var adapter: PeliculaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_listado_peliculas)
+
 
         val ivBack: ImageView = findViewById(R.id.ivBack)
         ivBack.setOnClickListener {
@@ -32,10 +41,11 @@ class ListadoPeliculasActivity : AppCompatActivity() {
             insets
         }
 
+
         inicializarRecyclerView()
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayShowTitleEnabled(false) //Elimina el titulo de la toolbar
-
+        getPeliculasApi()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -54,22 +64,29 @@ class ListadoPeliculasActivity : AppCompatActivity() {
         }
     }
 
-    private fun getPeliculas(): MutableList<Pelicula> {
 
-        val peliculas: MutableList<Pelicula> = ArrayList()
+    private fun getPeliculasApi() {
 
-        peliculas.add(Pelicula(1, "Spider-Man: No Way Home", "2021-12-15",9.5))
-        peliculas.add(Pelicula(2, "Black Widow", "2021-07-09",7.8))
-        peliculas.add(Pelicula(3, "The Batman", "2022-03-04",9.8))
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    RetrofitClient.retrofitService.getPeliculas()
+                }
 
-        return peliculas
+                val peliculas = response.results
+                adapter = PeliculaAdapter(peliculas.toMutableList(), this@ListadoPeliculasActivity)
+                rvPeliculas.adapter = adapter
 
+            } catch (e: Exception) {
+                Log.e("API Error", "Error fetching peliculas: ${e.message}")
+            }
+        }
     }
 
     private fun inicializarRecyclerView() {
         rvPeliculas = findViewById(R.id.rvPeliculas)
         rvPeliculas.layoutManager = LinearLayoutManager(this)
-        rvPeliculas.adapter =  PeliculaAdapter(getPeliculas(), this)
-
+        adapter = PeliculaAdapter(mutableListOf(), this)
+        rvPeliculas.adapter = adapter
     }
 }
