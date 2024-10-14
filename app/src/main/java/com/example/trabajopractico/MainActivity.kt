@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         notificaciones = Notificaciones()
         notificaciones.createNotificationChannel(this)
         inicializarComponentes()
-        recordarUsuario()
+        //recordarUsuario()
         navegarARegistro()
         manejarInicioSesion()
     }
