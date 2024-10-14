@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var checkBox: CheckBox
     private lateinit var ivBack: ImageView
     private lateinit var toolbar: Toolbar
+    private lateinit var notificaciones: Notificaciones
 
     lateinit var tvServicioRest: TextView
 
@@ -36,7 +37,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
+        notificaciones = Notificaciones()
+        notificaciones.createNotificationChannel(this)
         inicializarComponentes()
         //recordarUsuario()
         navegarARegistro()
@@ -72,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                             var preferencias = getSharedPreferences(resources.getString(R.string.sp_credenciales), MODE_PRIVATE)
                             preferencias.edit().putString(resources.getString(R.string.email_usuario), email).apply()
                             preferencias.edit().putString(resources.getString(R.string.password_usuario), contraseña).apply()
+                            notificaciones.mostrarNotificacion(this@MainActivity)
                             //Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
                         }
                         val intent = Intent(this@MainActivity, ListadoPeliculasActivity::class.java)
