@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
 
         inicializarComponentes()
-        recordarUsuario()
+        //recordarUsuario()
         navegarARegistro()
         manejarInicioSesion()
     }
