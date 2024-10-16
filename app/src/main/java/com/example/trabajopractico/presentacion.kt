@@ -26,10 +26,11 @@ class presentacion : AppCompatActivity() {
         inicializarComponentes()
         navegarARegistro()
         navegarAInicioSesion()
+        navegarATerminos()
     }
 
     private fun inicializarComponentes() {
-        btnIniciarSesion = findViewById(R.id.btnIniciarSesionP);
+        btnIniciarSesion = findViewById(R.id.btnIniciarSesionP)
         btnRegistrarse = findViewById(R.id.btnRegistrarseP)
     }
 
@@ -47,5 +48,16 @@ class presentacion : AppCompatActivity() {
         }
     }
 
+    private fun navegarATerminos() {
+        findViewById<Button>(R.id.btnTerminos).setOnClickListener {
 
+            val fragment = terminosFragmento()
+
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+    }
 }

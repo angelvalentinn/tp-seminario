@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/llBg"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="375dp"
         android:background="@color/black_opacity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,10 +68,7 @@
             android:layout_marginHorizontal="@dimen/marginHorizontal"
             android:backgroundTint="@color/secondary_300"
             android:text="Iniciar Sesión"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llInputs" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btnRegistrarseP"
@@ -81,10 +78,17 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/secondary_300"
             android:text="Registrar Usuario"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llInputs" />
+            android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/btnTerminos"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/secondary_300"
+            android:text="Términos y Condiciones"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
