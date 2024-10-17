@@ -52,6 +52,8 @@ class PeliculaAdapter (var peliculas: MutableList<Result>, var context: Context)
         holder.btnVerMas.setOnClickListener {
             val intent = Intent(context, ActivityDetalle::class.java)
             intent.putExtra("titulo", item.original_title)
+            intent.putExtra("overview", item.overview)
+            intent.putExtra("imagen", "https://image.tmdb.org/t/p/original/${item.poster_path}")
             context.startActivity(intent)
         }
     }
