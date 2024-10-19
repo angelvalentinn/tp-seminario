@@ -5,20 +5,39 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListadoPeliculasActivity"
-    android:orientation="vertical"
     android:background="@color/primary_300"
-    >
-    <include android:id="@+id/toolbar"
+    android:orientation="vertical"
+    tools:context=".ListadoPeliculasActivity">
 
-        layout="@layout/toolbar"/>
+    <include
+        android:id="@+id/toolbar"
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPeliculas"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primary_300"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_pelicula" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="80sp"
+            android:layout_height="80sp"
+            android:layout_centerInParent="true"
+            android:visibility="visible"
+
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPeliculas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_300"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_pelicula" />
+    </LinearLayout>
+
 
 </LinearLayout>

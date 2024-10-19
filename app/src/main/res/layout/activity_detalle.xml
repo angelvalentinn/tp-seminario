@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_300"
     android:padding="16dp">
-
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -26,34 +26,57 @@
             android:layout_height="450dp"
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
-
         <TextView
             android:id="@+id/tv_tituloDetalle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
+            android:layout_marginTop="16sp"
             android:background="@android:color/transparent"
             android:text="Titulo"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:textColorHint="@color/text"
-            android:textSize="22dp" />
-
+            android:textSize="22dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvSinopsis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
             android:background="@android:color/transparent"
             android:gravity="top"
             android:minLines="3"
-            android:layout_marginTop="15sp"
             android:text="Escribe la sinopsis aquí..."
             android:textColor="@color/text"
             android:textColorHint="@color/text"
             android:textSize="18sp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvGeneros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12sp"
+            tools:listitem="@layout/item_genero" />
 
+        <TextView
+            android:id="@+id/tv_tituloCast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:background="@android:color/transparent"
+            android:text="Actores"
+            android:textColor="@color/white"
+            android:textColorHint="@color/text"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvActores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            tools:listitem="@layout/item_actor" />
 
     </LinearLayout>
+
 </ScrollView>

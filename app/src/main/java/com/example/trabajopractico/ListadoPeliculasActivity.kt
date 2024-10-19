@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -23,12 +25,13 @@ class ListadoPeliculasActivity : AppCompatActivity() {
 
     private lateinit var rvPeliculas: RecyclerView
     private lateinit var adapter: PeliculaAdapter
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_listado_peliculas)
-
+        progressBar = findViewById(R.id.progressBar)
 
         val ivBack: ImageView = findViewById(R.id.ivBack)
         ivBack.setOnClickListener {
@@ -72,7 +75,7 @@ class ListadoPeliculasActivity : AppCompatActivity() {
                 val response = withContext(Dispatchers.IO) {
                     RetrofitClient.retrofitService.getPeliculas()
                 }
-
+                progressBar.visibility = View.GONE
                 val peliculas = response.results
                 adapter = PeliculaAdapter(peliculas.toMutableList(), this@ListadoPeliculasActivity)
                 rvPeliculas.adapter = adapter
