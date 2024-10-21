@@ -12,26 +12,27 @@ import com.bumptech.glide.Glide
 import com.example.trabajopractico.data.Result
 
 class MovieAdapter(
-    var movies: MutableList<Result<MovieEntity>>,  // Usamos Result<MovieEntity> aquí
+    var movies: List<MovieEntity>,  // Usamos Result<MovieEntity> aquí
     var context: Context
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var txtTitulo: TextView
-        var txtFecha: TextView
-        var txtCalificacion: TextView
+        var titulo: TextView
+        var posterPath: ImageView
+        var overview: TextView
+        var id: TextView
 
         init {
-            txtTitulo = view.findViewById(R.id.tv_titulo)
-            txtFecha = view.findViewById(R.id.tv_fecha)
-            txtCalificacion = view.findViewById(R.id.tv_calificacion)
-            txtCalificacion.text = "Calificación:"
+            titulo = view.findViewById(R.id.tvFavTitulo)
+            overview = view.findViewById(R.id.tvFavOverview)
+            posterPath = view.findViewById(R.id.ivFavPoster)
+            id = view.findViewById(R.id.tvFavId)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_pelicula, parent, false)  // Asegúrate de que este layout exista
+            .inflate(R.layout.item_favorito, parent, false)  // Asegúrate de que este layout exista
         return MovieViewHolder(view)
     }
 
@@ -39,22 +40,14 @@ class MovieAdapter(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = movies[position]
-        if (item is Result.Success) {  // Verifica si el resultado es exitoso
-            val movie = item.data
-            holder.txtTitulo.text = movie.title
+        holder.titulo.text = item.title
+        holder.overview.text = item.overview
+        holder.id.text = item.id.toString()
+        Glide.with(context)
+            .load("https://image.tmdb.org/t/p/original/${item.posterPath}")
+            .placeholder(R.drawable.imagen_fallback)
+            .into(holder.posterPath)
 
-
-        }
     }
 
-    fun updateMovies(favoriteMovies: List<MovieEntity>) {
-        movies.clear()  // Limpia la lista actual
-
-        for (movie in favoriteMovies) {
-            val result = Result.Success(movie)  // Crea un Result.Success para cada MovieEntity
-            movies.add(result)
-        }
-
-        notifyDataSetChanged()  // Notifica al adaptador que los datos han cambiado
-    }
 }

@@ -23,9 +23,6 @@ class FavoritasActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var movieDao: MovieDao
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -47,9 +44,6 @@ class FavoritasActivity : AppCompatActivity() {
         recyclerView.adapter = peliculaAdapter
 
         // Cargar películas favoritas
-        obtenerPeliculasFavoritas()
-    }
-    private fun obtenerPeliculasFavoritas() {
         obtenerFavoritasDesdeBD()
     }
 
@@ -57,9 +51,11 @@ class FavoritasActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val peliculas = withContext(Dispatchers.IO) {
-                    movieDao.getAllMovies() // Obtener las películas de la base de datos
+                    AppDatabase.getDatabase(applicationContext).movieDao().getAllMovies()
                 }
-                peliculaAdapter.updateMovies(peliculas) // Actualiza el adaptador con las películas obtenidas
+                
+                peliculaAdapter = MovieAdapter(peliculas.toMutableList(), this@FavoritasActivity)
+                recyclerView.adapter = peliculaAdapter
             } catch (e: Exception) {
                 // Manejo de errores
                 Log.e("FavoritasActivity", "Error al obtener las películas: ${e.message}")
