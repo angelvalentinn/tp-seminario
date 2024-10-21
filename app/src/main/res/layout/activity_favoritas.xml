@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_300"
     tools:context=".FavoritasActivity"
     android:orientation="vertical">
 
@@ -15,7 +16,7 @@
         android:id="@+id/recyclerViewFavoritas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_pelicula"/>
+        tools:listitem="@layout/item_favorito"/>
 
 
 </LinearLayout>
