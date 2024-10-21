@@ -51,10 +51,11 @@ class activityRegister : AppCompatActivity() {
     }
 
     private fun navegarAIniciarSesion() {
-        val intent = Intent(this, MainActivity::class.java);
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
+
 
     private fun validarEmail(email: String): Boolean {
         val emailRegex =

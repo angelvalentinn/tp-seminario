@@ -51,6 +51,22 @@ class ListadoPeliculasActivity : AppCompatActivity() {
         getPeliculasApi()
     }
 
+
+
+    private fun cerrarSesion() {
+        // Limpiar las credenciales almacenadas en SharedPreferences
+        val preferencias = getSharedPreferences(getString(R.string.sp_credenciales), MODE_PRIVATE)
+        val editor = preferencias.edit()
+        editor.clear() // Limpia todos los datos
+        editor.apply() // Aplica los cambios
+
+        // Redirigir al usuario a la actividad de inicio de sesión
+        val intent = Intent(this, MainActivity::class.java) // Cambia MainActivity por el nombre de tu actividad de inicio de sesión
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Limpiar la pila de actividades
+        startActivity(intent)
+        finish() // Cierra la actividad actual
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_crear_pelicula, menu)
         return true
@@ -61,6 +77,10 @@ class ListadoPeliculasActivity : AppCompatActivity() {
             R.id.action_add_pelicula -> {
                 val intent = Intent(this, FavoritasActivity::class.java)
                 startActivity(intent)
+                true
+            }
+            R.id.action_logout -> { // Maneja el cierre de sesión
+                cerrarSesion()
                 true
             }
             else -> super.onOptionsItemSelected(item)

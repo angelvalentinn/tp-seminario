@@ -35,13 +35,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         notificaciones = Notificaciones()
         notificaciones.createNotificationChannel(this)
         inicializarComponentes()
-        recordarUsuario()
+
         navegarARegistro()
+        recordarUsuario()
         manejarInicioSesion()
     }
 
@@ -60,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, activityRegister::class.java)
             startActivity(intent)
         }
+
     }
 
     private fun manejarInicioSesion() {
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
 
         if (emailGuardado!= null && passwordGuardado!= null) {
             Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
-            startMainActivity(emailGuardado) // Automatically log in
+            startMainActivity(emailGuardado)
         }
     }
 

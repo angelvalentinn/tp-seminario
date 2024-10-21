@@ -38,7 +38,9 @@ class presentacion : AppCompatActivity() {
         btnRegistrarse.setOnClickListener {
             val intent = Intent(this, activityRegister::class.java)
             startActivity(intent)
+
         }
+
     }
 
     private fun navegarAInicioSesion() {

@@ -7,5 +7,10 @@
         android:title="@string/add_pelicula"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/logout"
+        android:icon="@drawable/baseline_logout_24"
+        app:showAsAction="ifRoom" />
 
 </menu>
