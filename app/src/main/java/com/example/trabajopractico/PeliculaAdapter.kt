@@ -2,6 +2,7 @@ package com.example.trabajopractico
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Movie
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trabajopractico.data.model.Result
+
+import com.example.trabajopractico.MovieEntity
 
 class PeliculaAdapter (var peliculas: MutableList<Result>, var context: Context):
 
@@ -59,6 +62,8 @@ class PeliculaAdapter (var peliculas: MutableList<Result>, var context: Context)
             context.startActivity(intent)
         }
     }
+
+
 
 
 }

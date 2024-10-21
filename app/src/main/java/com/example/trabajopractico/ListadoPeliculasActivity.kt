@@ -59,7 +59,7 @@ class ListadoPeliculasActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_add_pelicula -> {
-                val intent = Intent(this, CrearPeliculaActivity::class.java)
+                val intent = Intent(this, FavoritasActivity::class.java)
                 startActivity(intent)
                 true
             }

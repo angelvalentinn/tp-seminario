@@ -5,17 +5,17 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CrearPeliculaActivity"
+    tools:context=".FavoritasActivity"
     android:orientation="vertical">
 
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
-    
-    <TextView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewFavoritas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Pantalla para agregar peliculas"/>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_pelicula"/>
 
 
 </LinearLayout>
