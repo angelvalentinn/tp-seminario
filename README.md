@@ -1,8 +1,12 @@
-# Trabajo Práctico - Entrega 2
+# Trabajo Práctico - Entrega 3
 ## Seminario de Lenguajes
-Agregado de menú y barra superior, iconos nativos de android, manejo de base de datos para los usuarios con su correspondiente lógica y funcionamiento de recordar usuario con shared preferences.
+Llamado a la API en un hilo de ejecución distinto, fragmento en la pantalla inicial en los términos y condiciones, notificación al recordar el usuario.
 
-![image1](https://github.com/user-attachments/assets/0189352f-51c5-4a4d-8974-b45106861919)
-![image2](https://github.com/user-attachments/assets/820127ec-45a8-4a5c-99a7-33c15115a632)
-![image3](https://github.com/user-attachments/assets/9e5ea304-e2e1-41a1-8609-d38c3fbd373b)
-![image4](https://github.com/user-attachments/assets/90cc676e-0685-4da2-bc9e-3382bedba168)
+![image](https://github.com/user-attachments/assets/edd34768-c889-4598-bd51-51df2da8db71)
+![image](https://github.com/user-attachments/assets/347ffdda-cf9b-490a-9d44-e8b20dd35c9d)
+![image](https://github.com/user-attachments/assets/32beeed7-1bab-48d7-9240-9dde2d0a054f)
+![image](https://github.com/user-attachments/assets/ee88bf58-b2a8-4ba4-bd0b-5a1d4e6e7f92)
+![image](https://github.com/user-attachments/assets/6a977424-8dce-4db3-a1f0-58b2395f0211)
+
+
+
