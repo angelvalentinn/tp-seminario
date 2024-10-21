@@ -3,9 +3,11 @@ package com.example.trabajopractico
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +35,8 @@ class activityRegister : AppCompatActivity() {
         ivBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+        val tvToolbarTitle: TextView = findViewById(R.id.tvToolbarTitle)
+        tvToolbarTitle.visibility = View.GONE
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

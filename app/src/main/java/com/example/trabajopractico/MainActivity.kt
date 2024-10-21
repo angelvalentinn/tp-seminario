@@ -3,6 +3,7 @@ package com.example.trabajopractico
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -35,9 +36,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val ivBack: ImageView = findViewById(R.id.ivBack)
+        ivBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        val tvToolbarTitle: TextView = findViewById(R.id.tvToolbarTitle)
+        tvToolbarTitle.visibility = View.GONE
+
         notificaciones = Notificaciones()
         notificaciones.createNotificationChannel(this)
         inicializarComponentes()
+
+
 
         navegarARegistro()
         recordarUsuario()

@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -48,23 +49,24 @@ class ListadoPeliculasActivity : AppCompatActivity() {
         inicializarRecyclerView()
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayShowTitleEnabled(false) //Elimina el titulo de la toolbar
+        val tvToolbarTitle: TextView = findViewById(R.id.tvToolbarTitle)
+        tvToolbarTitle.text = "Películas Populares"
         getPeliculasApi()
     }
 
 
 
     private fun cerrarSesion() {
-        // Limpiar las credenciales almacenadas en SharedPreferences
+
         val preferencias = getSharedPreferences(getString(R.string.sp_credenciales), MODE_PRIVATE)
         val editor = preferencias.edit()
-        editor.clear() // Limpia todos los datos
-        editor.apply() // Aplica los cambios
+        editor.clear()
+        editor.apply()
 
-        // Redirigir al usuario a la actividad de inicio de sesión
-        val intent = Intent(this, MainActivity::class.java) // Cambia MainActivity por el nombre de tu actividad de inicio de sesión
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Limpiar la pila de actividades
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
-        finish() // Cierra la actividad actual
+        finish()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -79,7 +81,7 @@ class ListadoPeliculasActivity : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
-            R.id.action_logout -> { // Maneja el cierre de sesión
+            R.id.action_logout -> {
                 cerrarSesion()
                 true
             }
